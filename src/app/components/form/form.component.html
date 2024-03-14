@@ -1,6 +1,7 @@
 <p>Form Component</p>
 <input type="text" [(ngModel)]="username" />
 <p>{{ username }}</p>
-<button (click)="writeToConsole()">Write to Console</button>
-<button (click)="changeFormTs()">Change</button>
-
+<button class="btn btn-primary" (click)="writeToConsole()">
+  Write to Console
+</button>
+<button class="btn btn-secondary" (click)="changeFormTs()">Change</button>
