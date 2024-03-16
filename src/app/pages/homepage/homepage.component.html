@@ -1,6 +1,6 @@
 <div class="container mt-5">
 <ul *ngIf="todoList.length > 0">
-  <li *ngFor="let item of todoList">{{ item }} <button class="btn btn-danger">X</button></li>
+  <li *ngFor="let item of todoList">{{ item.title }} <button class="btn btn-danger">X</button></li>
 </ul>
 <p *ngIf="todoList.length <= 0">There is no element in the list.</p>
 </div>

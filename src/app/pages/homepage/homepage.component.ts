@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ToDo } from '../../models/toDo';
 
 @Component({
   standalone: true,
@@ -9,53 +10,41 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   styleUrl: './homepage.component.scss',
 })
 export class HomepageComponent implements OnInit {
-  todoList: string[] = [
-    'List element 1',
-    'List element 2',
-    'List element 3',
-    'List element 4',
-    'List element 5',
+  todoList: ToDo[] = [
+    // 'List element 1',
+    // 'List element 2',
+    // 'List element 3',
+    // 'List element 4',
+    // 'List element 5',
   ];
 
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
-    //this.getTodos();
-    this.getTodos2();
-
+    this.getTodos();
+    //this.getTodos2();
   }
 
   getTodos() {
-    // this.httpClient.get('https://jsonplaceholder.typicode.com/todos');
-    console.log("fonksiyon öncesi");
-    this.someAsyncOperation()
-      .then((response: string) => {
-        console.log('cevap başarili promise ten şu değer geldi:', response);
-      }) //işlem başarılı
-      .catch((error) => {
-        console.log('cevap başarisiz promise ten şu değer geldi:', error);
-      }) //işlem başarılı
-      .finally(() => {
-        console.log("Promise işlemi başarili ya da başarisiz sonlandi.");
-      }); //işlem bitti. (başarılı/başarısız)
-      console.log("fonksiyon sonrasi");
+    this.httpClient
+      .get<ToDo[]>('https://jsonplaceholder.typicode.com/todos')
+      .subscribe({
+        next: (response: ToDo[]) => {
+          // console.log('backend den cevap geldi:', response);
+          this.todoList = response;
+        },
+        error: (error) => {
+          console.log('backend den hatali cevap geldi:', error);
+        },
+        complete: () => {
+          console.log('backend isteği sonlandi');
+        },
+      });
   }
 
-  async getTodos2(){
-    try {
-      let value: string = await this.someAsyncOperation();
-    console.log(value);
-    } catch (error) {
-      console.log("Hata:",error);
-    }
-    
+  postToDo(){
+    let obj = {};
+    this.httpClient.post("link", obj).subscribe();
   }
 
-  someAsyncOperation(): Promise<string> {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve('sonuç geldi');
-      }, 3000);
-    });
-  }
 }
