@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
   standalone: true,
-  imports: [NavbarComponent],
+  imports: [],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

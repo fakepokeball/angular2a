@@ -1,12 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
   standalone: true,
-  imports: [NavbarComponent],
+  imports: [CommonModule],
   templateUrl: './homepage.component.html',
-  styleUrl: './homepage.component.scss'
+  styleUrl: './homepage.component.scss',
 })
 export class HomepageComponent {
-
+  todoList: string[] = [
+    'List element 1',
+    'List element 2',
+    'List element 3',
+    'List element 4',
+    'List element 5',
+  ];
 }
